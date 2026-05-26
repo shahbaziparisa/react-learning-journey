@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+// Async / Await Example
 type User = {
   id: number;
   name: string;
