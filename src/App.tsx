@@ -47,7 +47,9 @@ export default function App() {
   };
 
   return (
-    <div
+    <>
+    
+     <div
       style={{
         display:"flex",
         flexDirection:"column",
@@ -70,8 +72,11 @@ export default function App() {
           <p>Name: {user.name}</p>
         </div>
       )}
-      <ClassComponent/>
-      <FunctionalComponent/>
+     
     </div>
+     <ClassComponent/>
+      <FunctionalComponent/>
+    </>
+   
   );
 }
