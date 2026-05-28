@@ -1,5 +1,13 @@
 import { useState } from "react";
 
+type UserComponentProps = {
+  name: string;
+  family?: string; //optional
+  dateOfBirth: number;
+  major: string;
+  specialty: string;
+  onLikeChange: (change: number) => void;
+};
 const UserComponent = ({
   name,
   family,
@@ -7,7 +15,7 @@ const UserComponent = ({
   major,
   specialty,
   onLikeChange,
-}) => {
+}: UserComponentProps) => {
   const age = new Date().getFullYear() - dateOfBirth;
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);

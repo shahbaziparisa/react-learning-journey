@@ -25,8 +25,9 @@ export default function App() {
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
 
-  const updateTotalLikes = (change) => {
-    setTotalLikes(totalLikes + change);
+  const updateTotalLikes = (change: number): void => {
+    // ← تایپ پارامتر و خروجی
+    setTotalLikes((prev) => prev + change);
   };
 
   const handleLoadUser = async () => {
