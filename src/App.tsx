@@ -24,9 +24,42 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
+  const users = [
+    {
+      id: 1,
+      name: "Parisa",
+      family: "Shahbazi",
+      dateOfBirth: 1999,
+      major: "Software",
+      specialty: "Front-end",
+    },
+    {
+      id: 2,
+      name: "Esmael",
+      family: "Hoseini",
+      dateOfBirth: 1997,
+      major: "Software",
+      specialty: "Back-end Python",
+    },
+    {
+      id: 3,
+      name: "Alex",
+      family: "JK",
+      dateOfBirth: 1980,
+      major: "Hardware",
+      specialty: "Repair Parts",
+    },
+    {
+      id: 4,
+      name: "Louise",
+      family: "Lang",
+      dateOfBirth: 1989,
+      major: "Fashion",
+      specialty: "Style",
+    },
+  ];
 
   const updateTotalLikes = (change: number): void => {
-    // ← تایپ پارامتر و خروجی
     setTotalLikes((prev) => prev + change);
   };
 
@@ -88,43 +121,20 @@ export default function App() {
         }}
       >
         Props & States
-        <UserComponent
-          name="Parisa"
-          family="Shahbazi"
-          dateOfBirth={1999}
-          major={"Software"}
-          specialty={"Front-end"}
-          onLikeChange={updateTotalLikes}
-        >
-          <div>
-            <button>Test</button>
-            children
-          </div>
-        </UserComponent>
-        <UserComponent
-          name="Esmael"
-          family="Hoseini"
-          dateOfBirth={1997}
-          major={"Software"}
-          specialty={"Back-end Python"}
-          onLikeChange={updateTotalLikes}
-        />
-        <UserComponent
-          name="Alex"
-          family="JK"
-          dateOfBirth={1980}
-          major={"Hardware"}
-          specialty={"Repair Parts"}
-          onLikeChange={updateTotalLikes}
-        />
-        <UserComponent
-          name="Louise"
-          family={"Lang"}
-          dateOfBirth={1989}
-          major={"Fashion"}
-          specialty={"Style"}
-          onLikeChange={updateTotalLikes}
-        />
+        {users.map((user) => (
+          <UserComponent
+            key={user.id}
+            {...user}
+            onLikeChange={updateTotalLikes}
+          >
+            {user.id === 1 && (
+              <div>
+                <button>Test</button>
+                children
+              </div>
+            )}
+          </UserComponent>
+        ))}
         <div
           style={{
             backgroundColor: "#4c8cafff",
