@@ -95,7 +95,12 @@ export default function App() {
           major={"Software"}
           specialty={"Front-end"}
           onLikeChange={updateTotalLikes}
-        />
+        >
+          <div>
+            <button>Test</button>
+            children
+          </div>
+        </UserComponent>
         <UserComponent
           name="Esmael"
           family="Hoseini"

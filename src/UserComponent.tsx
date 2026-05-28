@@ -7,6 +7,7 @@ type UserComponentProps = {
   major: string;
   specialty: string;
   onLikeChange: (change: number) => void;
+  children?: React.ReactNode;
 };
 const UserComponent = ({
   name,
@@ -15,6 +16,7 @@ const UserComponent = ({
   major,
   specialty,
   onLikeChange,
+  children,
 }: UserComponentProps) => {
   const age = new Date().getFullYear() - dateOfBirth;
   const [likes, setLikes] = useState(0);
@@ -83,6 +85,7 @@ const UserComponent = ({
           {isLiked ? "❤️ Liked" : "🤍 Like"}
         </button>
         <span>👍 {likes} likes</span>
+        <div>{children}</div>
       </div>
     </div>
   );
