@@ -1,6 +1,8 @@
 import { useState } from "react";
 import ClassComponent from "./ClassComponent";
 import FunctionalComponent from "./FunctionalComponent";
+import User from "./UserComponent";
+import UserComponent from "./UserComponent";
 // Async / Await Example
 type User = {
   id: number;
@@ -76,6 +78,13 @@ export default function App() {
     </div>
      <ClassComponent/>
       <FunctionalComponent/>
+      <div style={{
+        display:"flex",gap:'20px',alignContent:"center",justifyContent:"center"}}>
+      <UserComponent name="Parisa" family="Shahbazi" dateOfBirth={1999} major={"Software"} specialty={"Front-end"}/>
+      <UserComponent name="Esmael" family="Hoseini" dateOfBirth={1997} major={"Software"} specialty={"Back-end Python"}/>
+      <UserComponent name="Alex" family="JK" dateOfBirth={1980} major={"Hardware"} specialty={"Repair Parts"}/>
+      <UserComponent name="Louise" family={"Lang"} dateOfBirth={1989} major={"Fashion"} specialty={"Style"}/>
+      </div>
     </>
    
   );
