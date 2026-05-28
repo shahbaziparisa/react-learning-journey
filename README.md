@@ -77,17 +77,10 @@ This repository contains my exercises and projects while learning **React**. I'v
 ## 🔧 Installation & Running
 
 ```bash
-# 1. Clone repository
-git clone <your-repo-url>
 
-# 2. Enter project folder
-cd <project-folder>
-
-# 3. Install dependencies
 npm install
-
-# 4. Run project
 npm run dev
+
 ```
 
 🧠 What I Learned
