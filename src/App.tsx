@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ClassComponent from "./ClassComponent";
+import FunctionalComponent from "./FunctionalComponent";
 // Async / Await Example
 type User = {
   id: number;
@@ -68,6 +70,8 @@ export default function App() {
           <p>Name: {user.name}</p>
         </div>
       )}
+      <ClassComponent/>
+      <FunctionalComponent/>
     </div>
   );
 }
