@@ -112,7 +112,7 @@ export default function App() {
       <FunctionalComponent />
       <div
         style={{
-          backgroundColor: "#a9deeeff",
+          backgroundColor: "#34384fff",
           padding: "20px",
           display: "flex",
           gap: "20px",
@@ -137,7 +137,7 @@ export default function App() {
         ))}
         <div
           style={{
-            backgroundColor: "#4c8cafff",
+            backgroundColor: "#484f74ff",
             color: "white",
             padding: "10px",
             borderRadius: "8px",

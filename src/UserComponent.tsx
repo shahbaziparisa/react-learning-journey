@@ -43,6 +43,10 @@ const UserComponent = ({
         borderRadius: "15px",
         padding: "20px",
         flexDirection: "column",
+        alignItems: "start",
+        justifyContent: "start",
+        alignContent: "start",
+        textAlign: "left",
       }}
     >
       <p>
