@@ -6,6 +6,10 @@ import UserComponent from "./UserComponent";
 type User = {
   id: number;
   name: string;
+  family?: string;
+  dateOfBirth?: number;
+  major?: string;
+  specialty?: string;
 };
 
 // Fake async function
@@ -24,7 +28,7 @@ export default function App() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
-  const users = [
+  const initialUsers: User[] = [
     {
       id: 1,
       name: "Parisa",
@@ -58,6 +62,7 @@ export default function App() {
       specialty: "Style",
     },
   ];
+  const [alluser, setAllUsers] = useState<User[]>(initialUsers);
 
   const updateTotalLikes = (change: number): void => {
     setTotalLikes((prev) => prev + change);
@@ -82,6 +87,9 @@ export default function App() {
 
       console.log("Loading finished");
     }
+  };
+  const deleteUser = (id: number) => {
+    setAllUsers(alluser.filter((user) => user.id !== id));
   };
 
   return (
@@ -121,11 +129,12 @@ export default function App() {
           justifyContent: "center",
         }}
       >
-        {users.map((user) => (
+        {alluser.map((user) => (
           <UserComponent
             key={user.id}
             {...user}
             onLikeChange={updateTotalLikes}
+            handleDelete={deleteUser}
           >
             {user.id === 1 && (
               <div>

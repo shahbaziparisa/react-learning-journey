@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 type UserComponentProps = {
+  id: number;
   name: string;
   family?: string; //optional
   dateOfBirth: number;
@@ -8,8 +9,10 @@ type UserComponentProps = {
   specialty: string;
   onLikeChange: (change: number) => void;
   children?: React.ReactNode;
+  handleDelete: (id: number) => void;
 };
 const UserComponent = ({
+  id,
   name,
   family,
   dateOfBirth,
@@ -17,6 +20,7 @@ const UserComponent = ({
   specialty,
   onLikeChange,
   children,
+  handleDelete,
 }: UserComponentProps) => {
   const age = new Date().getFullYear() - dateOfBirth;
   const [likes, setLikes] = useState(0);
@@ -25,24 +29,21 @@ const UserComponent = ({
 
   const handleLike = () => {
     if (!isLiked) {
-      setLikes(likes + 1);
+      setLikes((prev) => prev + 1);
       onLikeChange(1);
       setIsLiked(true);
     } else {
-      setLikes(likes - 1);
+      setLikes((prev) => prev - 1);
       onLikeChange(-1);
       setIsLiked(false);
     }
   };
-  const handleDelete = () => {
-    console.log("Delete clicked");
+
+  const handleDeleteClick = () => {
     setIsFlashing(true);
-
     setTimeout(() => {
-      setIsFlashing(false);
+      handleDelete(id);
     }, 300);
-
-    // Your delete logic here
   };
 
   return (
@@ -67,8 +68,7 @@ const UserComponent = ({
         <strong>Family :</strong> {family || "Unknown"}{" "}
       </p>
       <p>
-        <strong>DateOfBirth :</strong> {dateOfBirth || "Not provided"} (Age:{" "}
-        {age} years old)
+        <strong>Birth :</strong> {dateOfBirth ?? "Not provided"} (Age: {age})
       </p>
       <p>
         <strong>Major :</strong> {major || "Not specified"}{" "}
@@ -109,9 +109,11 @@ const UserComponent = ({
             padding: "5px 15px",
             borderRadius: "5px",
             cursor: "pointer",
-            transition: "background-color 0.3s ease",
+            opacity: isFlashing ? 0 : 1,
+            transform: isFlashing ? "scale(0.9)" : "scale(1)",
+            transition: "all 0.3s ease",
           }}
-          onClick={handleDelete}
+          onClick={handleDeleteClick}
         >
           🗑️
         </button>
