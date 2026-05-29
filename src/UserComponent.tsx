@@ -21,6 +21,7 @@ const UserComponent = ({
   const age = new Date().getFullYear() - dateOfBirth;
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
+  const [isFlashing, setIsFlashing] = useState(false);
 
   const handleLike = () => {
     if (!isLiked) {
@@ -32,6 +33,16 @@ const UserComponent = ({
       onLikeChange(-1);
       setIsLiked(false);
     }
+  };
+  const handleDelete = () => {
+    console.log("Delete clicked");
+    setIsFlashing(true);
+
+    setTimeout(() => {
+      setIsFlashing(false);
+    }, 300);
+
+    // Your delete logic here
   };
 
   return (
@@ -90,6 +101,20 @@ const UserComponent = ({
         </button>
         <span>👍 {likes} likes</span>
         <div>{children}</div>
+        <button
+          style={{
+            backgroundColor: isFlashing ? "#838383ff" : "#f7f7f7ff",
+            color: "white",
+            border: "none",
+            padding: "5px 15px",
+            borderRadius: "5px",
+            cursor: "pointer",
+            transition: "background-color 0.3s ease",
+          }}
+          onClick={handleDelete}
+        >
+          🗑️
+        </button>
       </div>
     </div>
   );

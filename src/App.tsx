@@ -110,6 +110,7 @@ export default function App() {
       </div>
       <ClassComponent />
       <FunctionalComponent />
+      Props & States
       <div
         style={{
           backgroundColor: "#34384fff",
@@ -120,7 +121,6 @@ export default function App() {
           justifyContent: "center",
         }}
       >
-        Props & States
         {users.map((user) => (
           <UserComponent
             key={user.id}
@@ -144,7 +144,7 @@ export default function App() {
             textAlign: "center",
           }}
         >
-          💖 Total Likes in All Users: {totalLikes}
+          💖 Total Likes : {totalLikes}
         </div>
       </div>
     </>
