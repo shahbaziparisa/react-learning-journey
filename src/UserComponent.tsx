@@ -61,6 +61,23 @@ const UserComponent = ({
     console.log(`Liked status changed: ${isLiked}`);
   }, [isLiked]);
 
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        console.log(`${name}: Escape pressed`);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+
+    console.log("Event Listener Added");
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      console.log("Event Listener Removed");
+    };
+  }, [name]);
+
   return (
     <div
       style={{
