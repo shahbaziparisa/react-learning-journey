@@ -5,9 +5,9 @@ type UserComponentProps = {
   id: number;
   name: string;
   family?: string; //optional
-  dateOfBirth: number;
-  major: string;
-  specialty: string;
+  dateOfBirth?: number;
+  major?: string;
+  specialty?: string;
   onLikeChange: (change: number) => void;
   children?: React.ReactNode;
   handleDelete: (id: number) => void;
@@ -23,7 +23,7 @@ const UserComponent = ({
   children,
   handleDelete,
 }: UserComponentProps) => {
-  const age = new Date().getFullYear() - dateOfBirth;
+  const age = dateOfBirth ? new Date().getFullYear() - dateOfBirth : "Unknown";
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);

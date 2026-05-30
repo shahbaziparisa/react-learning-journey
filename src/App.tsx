@@ -92,7 +92,7 @@ export default function App() {
     setAllUsers(alluser.filter((user) => user.id !== id));
   };
 
-  const searchUser = (char) => {
+  const searchUser = (char: string) => {
     const search = char.toLowerCase();
     const newSearched = initialUsers.filter(
       (user) =>
