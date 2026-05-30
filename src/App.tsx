@@ -92,6 +92,17 @@ export default function App() {
     setAllUsers(alluser.filter((user) => user.id !== id));
   };
 
+  const searchUser = (char) => {
+    const search = char.toLowerCase();
+    const newSearched = initialUsers.filter(
+      (user) =>
+        user.name.toLowerCase().includes(search) ||
+        user.family?.toLowerCase().includes(search),
+    );
+    console.log(newSearched);
+    setAllUsers(newSearched);
+  };
+
   return (
     <>
       <div
@@ -118,7 +129,8 @@ export default function App() {
       </div>
       <ClassComponent />
       <FunctionalComponent />
-      Props & States
+      Props & States -Search User
+      <input type="text" onChange={(e) => searchUser(e.target.value)} />
       <div
         style={{
           backgroundColor: "#34384fff",
