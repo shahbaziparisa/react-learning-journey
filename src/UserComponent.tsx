@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 
 type UserComponentProps = {
   id: number;
@@ -45,6 +46,20 @@ const UserComponent = ({
       handleDelete(id);
     }, 300);
   };
+
+  useEffect(() => {
+    console.log(`User ${name} mounted`);
+    console.log("%c MOUNT", "color:green;font-size:16px");
+
+    return () => {
+      console.log(`User ${name} unmounted`);
+      console.log("%c UNMOUNT", "color:red;font-size:16px");
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log(`Liked status changed: ${isLiked}`);
+  }, [isLiked]);
 
   return (
     <div
