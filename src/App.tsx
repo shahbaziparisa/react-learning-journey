@@ -2,6 +2,7 @@ import { useState } from "react";
 import ClassComponent from "./ClassComponent";
 import FunctionalComponent from "./FunctionalComponent";
 import UserComponent from "./userComponent/UserComponent";
+import styles from "./App.module.css";
 // Async / Await Example
 type User = {
   id: number;
@@ -105,15 +106,7 @@ export default function App() {
 
   return (
     <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "column",
-          fontFamily: "sans-serif",
-          padding: "20px",
-          gap: "30px",
-        }}
-      >
+      <div className={styles.mainContainer}>
         <h2>Async / Await Example</h2>
 
         <button onClick={handleLoadUser}>Load User</button>
@@ -131,16 +124,7 @@ export default function App() {
       <FunctionalComponent />
       Props & States -Search User
       <input type="text" onChange={(e) => searchUser(e.target.value)} />
-      <div
-        style={{
-          backgroundColor: "#34384fff",
-          padding: "20px",
-          display: "flex",
-          gap: "20px",
-          alignContent: "center",
-          justifyContent: "center",
-        }}
-      >
+      <div className={styles["all-users-container"]}>
         {alluser.map((user) => (
           <UserComponent
             key={user.id}
