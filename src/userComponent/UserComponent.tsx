@@ -29,6 +29,14 @@ const UserComponent = ({
   const [isLiked, setIsLiked] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
 
+  const likeStyle = {
+    display: "flex",
+    alignItems: "center",
+    gap: "10px",
+    marginTop: "10px",
+    paddingTop: "10px",
+    borderTop: "1px solid #eee",
+  };
   const handleLike = () => {
     if (!isLiked) {
       setLikes((prev) => prev + 1);
@@ -96,16 +104,7 @@ const UserComponent = ({
       <p>
         <strong>Specialty :</strong> {specialty || "Not specified"}{" "}
       </p>
-      <div
-        style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "10px",
-          marginTop: "10px",
-          paddingTop: "10px",
-          borderTop: "1px solid #eee",
-        }}
-      >
+      <div style={likeStyle}>
         <button
           onClick={handleLike}
           style={{
