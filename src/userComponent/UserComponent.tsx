@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useEffect } from "react";
+import "./userComponent.css";
 
 type UserComponentProps = {
   id: number;
@@ -79,20 +80,7 @@ const UserComponent = ({
   }, [name]);
 
   return (
-    <div
-      style={{
-        gap: "20px",
-        display: "flex",
-        backgroundColor: "#ffffff",
-        borderRadius: "15px",
-        padding: "20px",
-        flexDirection: "column",
-        alignItems: "start",
-        justifyContent: "start",
-        alignContent: "start",
-        textAlign: "left",
-      }}
-    >
+    <div className="maindiv">
       <p>
         <strong>Name:</strong> {name || "Unknown"}
       </p>

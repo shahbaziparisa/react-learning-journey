@@ -1,7 +1,7 @@
 import { useState } from "react";
 import ClassComponent from "./ClassComponent";
 import FunctionalComponent from "./FunctionalComponent";
-import UserComponent from "./UserComponent";
+import UserComponent from "./userComponent/UserComponent";
 // Async / Await Example
 type User = {
   id: number;
