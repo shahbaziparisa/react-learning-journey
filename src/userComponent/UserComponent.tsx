@@ -31,8 +31,8 @@ const UserComponent = ({
   const age = dateOfBirth ? new Date().getFullYear() - dateOfBirth : "Unknown";
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
-  const [isFlashing, setIsFlashing] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
 
   const likeStyle = {
     display: "flex",
@@ -54,9 +54,12 @@ const UserComponent = ({
     }
   };
 
-  const handleDeleteClick = () => {
-    setIsFlashing(true);
+  const handleDeleteClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const btn = e.currentTarget;
+    btn.classList.add("flash");
+    setIsDeleting(true);
     setTimeout(() => {
+      btn.classList.remove("flash");
       handleDelete(id);
     }, 300);
   };
@@ -123,7 +126,15 @@ const UserComponent = ({
   }, []);
 
   return (
-    <div ref={cardRef} className="maindiv">
+    <div
+      ref={cardRef}
+      className="maindiv"
+      style={{
+        opacity: isDeleting ? 0 : 1,
+        transform: isDeleting ? "scale(0.9)" : "scale(1)",
+        transition: "all 0.5s ease",
+      }}
+    >
       <p>
         <strong>Name:</strong> {name || "Unknown"}
       </p>
@@ -156,15 +167,13 @@ const UserComponent = ({
         <span>👍 {likes} likes</span>
         <div>{children}</div>
         <button
+          className="delete-btn"
           style={{
-            backgroundColor: isFlashing ? "#838383ff" : "#f7f7f7ff",
             color: "white",
             border: "none",
             padding: "5px 15px",
             borderRadius: "5px",
             cursor: "pointer",
-            opacity: isFlashing ? 0 : 1,
-            transform: isFlashing ? "scale(0.9)" : "scale(1)",
             transition: "all 0.3s ease",
           }}
           onClick={handleDeleteClick}

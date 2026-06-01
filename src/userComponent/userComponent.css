@@ -10,3 +10,14 @@
     align-content: start;
     text-align: left;
 }
+
+.delete-btn {
+    background-color: #f7f7f7;
+}
+
+.delete-btn.flash {
+    background-color: rgb(66, 13, 13);
+    transform: scale(0.9);
+    transition: all 0.2s ease;
+
+}
