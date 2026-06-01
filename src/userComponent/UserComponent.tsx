@@ -1,7 +1,11 @@
-import { useState } from "react";
-import { useEffect } from "react";
 import "./userComponent.css";
-
+import {
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+  useInsertionEffect,
+} from "react";
 type UserComponentProps = {
   id: number;
   name: string;
@@ -28,6 +32,7 @@ const UserComponent = ({
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [isFlashing, setIsFlashing] = useState(false);
+  const cardRef = useRef<HTMLDivElement>(null);
 
   const likeStyle = {
     display: "flex",
@@ -86,9 +91,39 @@ const UserComponent = ({
       console.log("Event Listener Removed");
     };
   }, [name]);
+  useInsertionEffect(() => {
+    console.log(
+      "%c useInsertionEffect",
+      "background:#8b5cf6;color:white;padding:4px 8px;border-radius:4px",
+    );
+
+    if (cardRef.current) {
+      cardRef.current.style.backgroundColor = "#ede9fe";
+    }
+  }, []);
+  useLayoutEffect(() => {
+    console.log(
+      "%c useLayoutEffect",
+      "background:#3b82f6;color:white;padding:4px 8px;border-radius:4px",
+    );
+
+    if (cardRef.current) {
+      cardRef.current.style.border = "3px solid #3b82f6";
+    }
+  }, []);
+  useEffect(() => {
+    console.log(
+      "%c useEffect",
+      "background:#22c55e;color:white;padding:4px 8px;border-radius:4px",
+    );
+
+    if (cardRef.current) {
+      cardRef.current.style.boxShadow = "0 0 20px rgba(34,197,94,.6)";
+    }
+  }, []);
 
   return (
-    <div className="maindiv">
+    <div ref={cardRef} className="maindiv">
       <p>
         <strong>Name:</strong> {name || "Unknown"}
       </p>
