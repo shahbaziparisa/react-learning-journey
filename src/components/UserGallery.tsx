@@ -1,7 +1,6 @@
 import { useCallback } from "react";
 import { getUserGallery } from "../api/userGallery";
 import { useFetch } from "../hooks/useFetch";
-import type { UserGallery } from "../types/userGallery";
 
 export default function UserGallery() {
   const fetchUserGallery = useCallback(() => getUserGallery(4), []);
@@ -24,7 +23,7 @@ export default function UserGallery() {
           <h1 className="text-2xl font-bold mb-6">User Gallery</h1>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {userGallery.map((u) => (
+            {userGallery?.map((u) => (
               <div
                 key={u.id}
                 className="bg-gray-900 rounded-xl overflow-hidden shadow hover:scale-105 transition"

@@ -1,7 +1,7 @@
 import { api } from "./axiosClient";
-import type { Product } from "../types/products";
+import type { Products } from "../types/products";
 
-export async function getProducts(limit = 20): Promise<Product[]> {
+export async function getProducts(limit = 20): Promise<Products[]> {
     const res = await api.get("/products", {
         params: {
             offset: 0,

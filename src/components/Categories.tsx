@@ -24,7 +24,7 @@ export default function Categories() {
           <h1 className="text-2xl font-bold mb-6">Categories</h1>
 
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
-            {categories.map((c) => (
+            {categories?.map((c) => (
               <div
                 key={c.id}
                 className="bg-gray-900 rounded-xl overflow-hidden shadow hover:scale-105 transition"
