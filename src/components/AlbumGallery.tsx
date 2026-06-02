@@ -1,29 +1,34 @@
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { getProducts } from "../api/products";
-import type { Product } from "../types/products";
+import { useFetch } from "../hooks/useFetch";
 
 export default function AlbumGallery() {
-  const [products, setProducts] = useState<Product[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
+  // const { data: products, loading, error } = useFetch(() => getProducts(12));
+  //It is better to use useCallback to memoize the fetchProducts function, because if we don't use it, the function will be recreated on every render, and it will cause the useEffect in useFetch to run on every render, which is not what we want. We only want to fetch products when the component mounts, not on every render. By using useCallback, we ensure that the fetchProducts function is only created once, and it will not cause unnecessary re-renders or re-fetching of products.
+  const fetchProducts = useCallback(() => getProducts(12), []);
+  const { data: products, loading, error } = useFetch(fetchProducts);
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        setLoading(true);
-        setError(null);
+  //ّI delete this part and move it to custome hook useFetch to make it reusable for other components like categories and etc.
+  // const [products, setProducts] = useState<Product[]>([]);
+  // const [loading, setLoading] = useState(true);
+  // const [error, setError] = useState<string | null>(null);
+  // useEffect(() => {
+  //   const load = async () => {
+  //     try {
+  //       setLoading(true);
+  //       setError(null);
 
-        const data = await getProducts(12);
-        setProducts(data);
-      } catch (err) {
-        setError(err instanceof Error ? err.message : "Error");
-      } finally {
-        setLoading(false);
-      }
-    };
+  //       const data = await getProducts(12);
+  //       setProducts(data);
+  //     } catch (err) {
+  //       setError(err instanceof Error ? err.message : "Error");
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
 
-    load();
-  }, []);
+  //   load();
+  // }, []);
 
   return (
     <>
@@ -42,7 +47,7 @@ export default function AlbumGallery() {
           <h1 className="text-2xl font-bold mb-6">Products</h1>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {products.map((p) => (
+            {products?.map((p) => (
               <div
                 key={p.id}
                 className="bg-gray-900 rounded-xl overflow-hidden shadow hover:scale-105 transition"
