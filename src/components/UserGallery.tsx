@@ -1,30 +1,11 @@
-import type { UserGallery } from "../types/userGallery";
-import { useEffect, useState } from "react";
+import { useCallback } from "react";
 import { getUserGallery } from "../api/userGallery";
+import { useFetch } from "../hooks/useFetch";
+import type { UserGallery } from "../types/userGallery";
 
 export default function UserGallery() {
-  const [userGallery, setUserGallery] = useState<UserGallery[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchUserGallery = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const userGallery = await getUserGallery(4);
-        setUserGallery(userGallery);
-      } catch (err) {
-        setError(
-          `Failed to fetch user gallery: ${err instanceof Error ? err.message : "Error"}`,
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUserGallery();
-  }, []);
+  const fetchUserGallery = useCallback(() => getUserGallery(4), []);
+  const { data: userGallery, loading, error } = useFetch(fetchUserGallery);
 
   return (
     <>

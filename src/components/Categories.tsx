@@ -1,30 +1,11 @@
-import type { Category } from "../types/category";
-import { useEffect, useState } from "react";
 import { getCategories } from "../api/categories";
+import { useFetch } from "../hooks/useFetch";
+import { useCallback } from "react";
 
 export default function Categories() {
-  const [categories, setCategories] = useState<Category[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      setLoading(true);
-      setError(null);
-      try {
-        const categories = await getCategories(5);
-        setCategories(categories);
-      } catch (err) {
-        setError(
-          `Failed to fetch categories: ${err instanceof Error ? err.message : "Error"}`,
-        );
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchCategories();
-  }, []);
+  const fetchCategories = useCallback(() => getCategories(5), []);
+  //categories is change name alias for data, because we know that data is categories, so it is better to change the name of data to categories to make it more readable and understandable.
+  const { data: categories, loading, error } = useFetch(fetchCategories);
 
   return (
     <>
