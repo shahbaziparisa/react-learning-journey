@@ -4,6 +4,8 @@ import FunctionalComponent from "./components/FunctionalComponent";
 import UserComponent from "./components/userComponent/UserComponent";
 import styles from "./App.module.css";
 import AlbumGallery from "./components/AlbumGallery";
+import Categories from "./components/Categories";
+import UserGallery from "./components/UserGallery";
 
 // Async / Await Example
 type User = {
@@ -109,6 +111,7 @@ export default function App() {
   return (
     <>
       <div className={styles.mainContainer}>
+        <h1>My React Learning Journey Tests</h1>
         <h2>Async / Await Example</h2>
         <button onClick={handleLoadUser}>Load User</button>
         {loading && <p>Loading...</p>}
@@ -165,6 +168,16 @@ export default function App() {
       <br />
       Working with Axios -State & Effects
       <AlbumGallery />
+      -----------------------------------
+      <br />
+      Useing Loading , Data and Error handleing Repeatedly for different
+      components is not a good idea
+      <br /> Solution : Create a reusable component to handle loading , data and
+      error states
+      <br />
+      <br />
+      <Categories />
+      <UserGallery />
     </>
   );
 }
