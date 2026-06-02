@@ -2,6 +2,7 @@ const FunctionalComponent = () => {
   return (
     <div>
       <h3>I am a functional component</h3>
+      ------------------------------------
     </div>
   );
 };

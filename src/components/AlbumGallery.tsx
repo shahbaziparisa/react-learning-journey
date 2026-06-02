@@ -1,0 +1,63 @@
+import { useEffect, useState } from "react";
+import { getProducts } from "../api/products";
+import type { Product } from "../types/products";
+
+export default function AlbumGallery() {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+
+  useEffect(() => {
+    const load = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+
+        const data = await getProducts(12);
+        setProducts(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Error");
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    load();
+  }, []);
+
+  return (
+    <>
+      {loading && (
+        <div className="min-h-screen flex items-center justify-center text-white bg-gray-950">
+          Loading products...
+        </div>
+      )}
+      {error && (
+        <div className="min-h-screen flex items-center justify-center text-red-400 bg-gray-950">
+          {error}
+        </div>
+      )}
+      {!loading && !error && (
+        <div className="min-h-screen bg-gray-950 text-white p-6">
+          <h1 className="text-2xl font-bold mb-6">Products</h1>
+
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            {products.map((p) => (
+              <div
+                key={p.id}
+                className="bg-gray-900 rounded-xl overflow-hidden shadow hover:scale-105 transition"
+              >
+                <img src={p.images?.[0]} className="h-40 w-full object-cover" />
+
+                <div className="p-3">
+                  <h2 className="text-sm font-bold">{p.title}</h2>
+                  <p className="text-green-400 mt-1">${p.price}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+    </>
+  );
+}

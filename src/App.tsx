@@ -1,8 +1,10 @@
 import { useState } from "react";
-import ClassComponent from "./ClassComponent";
-import FunctionalComponent from "./FunctionalComponent";
-import UserComponent from "./userComponent/UserComponent";
+import ClassComponent from "./components/ClassComponent";
+import FunctionalComponent from "./components/FunctionalComponent";
+import UserComponent from "./components/userComponent/UserComponent";
 import styles from "./App.module.css";
+import AlbumGallery from "./components/AlbumGallery";
+
 // Async / Await Example
 type User = {
   id: number;
@@ -108,22 +110,29 @@ export default function App() {
     <>
       <div className={styles.mainContainer}>
         <h2>Async / Await Example</h2>
-
         <button onClick={handleLoadUser}>Load User</button>
-
         {loading && <p>Loading...</p>}
-
         {user && (
           <div>
             <p>ID: {user.id}</p>
             <p>Name: {user.name}</p>
           </div>
         )}
+        -----------------------------------
       </div>
       <ClassComponent />
       <FunctionalComponent />
       Props & States -Search User
-      <input type="text" onChange={(e) => searchUser(e.target.value)} />
+      <input
+        style={{
+          backgroundColor: "#ffffff",
+          padding: "8px",
+          margin: "10px",
+          borderRadius: "8px",
+        }}
+        type="text"
+        onChange={(e) => searchUser(e.target.value)}
+      />
       <div className={styles["all-users-container"]}>
         {alluser.map((user) => (
           <UserComponent
@@ -152,6 +161,10 @@ export default function App() {
           💖 Total Likes : {totalLikes}
         </div>
       </div>
+      -----------------------------------
+      <br />
+      Working with Axios -State & Effects
+      <AlbumGallery />
     </>
   );
 }
