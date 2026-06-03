@@ -6,6 +6,8 @@ import styles from "./App.module.css";
 import AlbumGallery from "./components/AlbumGallery";
 import Categories from "./components/Categories";
 import UserGallery from "./components/UserGallery";
+import { BrowserRouter, Route, Routes } from "react-router";
+import LocationList from "./components/Locations";
 
 // Async / Await Example
 type User = {
@@ -178,6 +180,15 @@ export default function App() {
       <br />
       <Categories />
       <UserGallery />
+      <BrowserRouter>
+        <Routes>
+          <Route path="/albums" element={<AlbumGallery />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/users" element={<UserGallery />} />
+          <Route path="/locations" element={<LocationList />} />
+        </Routes>
+      </BrowserRouter>
+      ,
     </>
   );
 }
