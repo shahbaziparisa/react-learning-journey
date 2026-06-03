@@ -6,7 +6,7 @@ import styles from "./App.module.css";
 import AlbumGallery from "./components/AlbumGallery";
 import Categories from "./components/Categories";
 import UserGallery from "./components/UserGallery";
-import { Link, Route, Routes } from "react-router";
+import { Link, NavLink, Route, Routes } from "react-router";
 import LocationList from "./components/Locations";
 
 // Async / Await Example
@@ -180,19 +180,44 @@ export default function App() {
       <br />
       <Categories />
       <UserGallery />
+      This is Link
       <Link
         to="/locations"
-        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white font-medium shadow-md hover:bg-blue-700 hover:shadow-lg active:scale-95 transition-all duration-200"
+        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
       >
         Route to Locations
       </Link>
-      <Routes>
-        <Route path="/albums" element={<AlbumGallery />} />
-        <Route path="/categories" element={<Categories />} />
-        <Route path="/users" element={<UserGallery />} />
-        <Route path="/locations" element={<LocationList />} />
-      </Routes>
-      ,
+      <br></br>
+      These are NavLink
+      <div className="flex gap-3 p-4 border-b">
+        <br></br>
+        <NavLink
+          to="/albums"
+          className={({ isActive }) =>
+            `px-5 py-2.5 rounded-xl shadow-md transition
+            ${isActive ? "bg-purple-600 text-white" : "bg-gray-300 text-black"}`
+          }
+        >
+          Product Gallery
+        </NavLink>
+        <NavLink
+          to="/users"
+          className={({ isActive }) =>
+            `px-5 py-2.5 rounded-xl shadow-md transition
+            ${isActive ? "bg-purple-600 text-white" : "bg-gray-300 text-black"}`
+          }
+        >
+          User Gallery
+        </NavLink>
+      </div>
+      <div className="p-4">
+        <Routes>
+          <Route path="/albums" element={<AlbumGallery />} />
+          <Route path="/categories" element={<Categories />} />
+          <Route path="/users" element={<UserGallery />} />
+          <Route path="/locations" element={<LocationList />} />
+        </Routes>
+      </div>
     </>
   );
 }
