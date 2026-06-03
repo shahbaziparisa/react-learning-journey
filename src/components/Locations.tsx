@@ -1,4 +1,3 @@
-import React from "react";
 import { useFetch } from "../hooks/useFetch";
 import { getLocations } from "../api/locations";
 import { useCallback } from "react";
