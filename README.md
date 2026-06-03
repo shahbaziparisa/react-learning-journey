@@ -6,7 +6,8 @@ This repository contains my exercises and projects while learning **React**. I'v
 
 Here You can see UseReducer Smaple with Code and Diagram and Examples better
 ![UseReducer Diagram Sample](./src/assets/usereducer.png)
-![UseReducer Article on my Linkedin]()
+
+(<[Linkedin Article](https://www.linkedin.com/pulse/understanding-usereducer-typescript-generics-deep-guide-shahbazi-gezdf)>)
 
 ## 📚 Concepts Implemented
 
