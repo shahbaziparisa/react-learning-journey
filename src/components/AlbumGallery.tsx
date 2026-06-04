@@ -1,6 +1,7 @@
 import { useCallback } from "react";
 import { getProducts } from "../api/products";
 import { useFetch } from "../hooks/useFetch";
+import { Link } from "react-router";
 
 export default function AlbumGallery() {
   // const { data: products, loading, error } = useFetch(() => getProducts(12));
@@ -48,17 +49,15 @@ export default function AlbumGallery() {
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {products?.map((p) => (
-              <div
+              <Link
                 key={p.id}
-                className="bg-gray-900 rounded-xl overflow-hidden shadow hover:scale-105 transition"
+                //currennt route is /albums  and we want to go to /albums/:id when we click on the product, so we can use relative routing by just putting the id as the link's to prop
+                to={`${p.id}`}
+                className="bg-gray-900 rounded-xl p-3 hover:scale-105 transition"
               >
                 <img src={p.images?.[0]} className="h-40 w-full object-cover" />
-
-                <div className="p-3">
-                  <h2 className="text-sm font-bold">{p.title}</h2>
-                  <p className="text-green-400 mt-1">${p.price}</p>
-                </div>
-              </div>
+                <h2 className="text-sm font-bold text-white">{p.title}</h2>
+              </Link>
             ))}
           </div>
         </div>

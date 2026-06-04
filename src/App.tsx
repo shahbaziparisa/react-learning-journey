@@ -8,6 +8,8 @@ import Categories from "./components/Categories";
 import UserGallery from "./components/UserGallery";
 import { Link, NavLink, Route, Routes } from "react-router";
 import LocationList from "./components/Locations";
+import AlbumsLayout from "./components/AlbumLayout";
+import AlbumDetail from "./components/AlbumDetail";
 
 // Async / Await Example
 type User = {
@@ -212,7 +214,14 @@ export default function App() {
       </div>
       <div className="p-4">
         <Routes>
-          <Route path="/albums" element={<AlbumGallery />} />
+          {/* here is Nested Routes */}
+          <Route path="/albums" element={<AlbumsLayout />}>
+            {/* show AlbumGallery by default */}
+            <Route index element={<AlbumGallery />} />
+            {/* Show AlbumDetail when Id  */}
+            <Route path=":id" element={<AlbumDetail />} />
+          </Route>
+
           <Route path="/categories" element={<Categories />} />
           <Route path="/users" element={<UserGallery />} />
           <Route path="/locations" element={<LocationList />} />
