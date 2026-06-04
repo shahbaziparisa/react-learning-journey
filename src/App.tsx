@@ -218,7 +218,7 @@ export default function App() {
           <Route path="/albums" element={<AlbumsLayout />}>
             {/* show AlbumGallery by default */}
             <Route index element={<AlbumGallery />} />
-            {/* Show AlbumDetail when Id  */}
+            {/* Show AlbumDetail when Id   . It is Called Dynamic Route*/}
             <Route path=":id" element={<AlbumDetail />} />
           </Route>
 
