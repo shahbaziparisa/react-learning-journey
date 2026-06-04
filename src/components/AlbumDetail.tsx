@@ -1,20 +1,13 @@
-import { useParams } from "react-router";
-import { useFetch } from "../hooks/useFetch";
-import { getProductById } from "../api/getProductbyId";
-import { useCallback } from "react";
+import { useLocation, useParams } from "react-router";
 
 export default function AlbumDetail() {
   //UseParams is carrying the parameters in routes and we can call it like this :
   const { id } = useParams();
-  const fetchProduct = useCallback(() => {
-    if (!id) throw new Error("No ID");
-    return getProductById(Number(id));
-  }, [id]);
-  const { data: product, loading, error } = useFetch(fetchProduct);
-
-  if (loading) return <div className="text-white p-4">Loading...</div>;
-  if (error) return <div className="text-red-400 p-4">{error}</div>;
-  if (!product) return null;
+  //UseLocation can carry one state and more contains objects
+  const stateLoacation = useLocation();
+  console.log("stateLocation", stateLoacation.state);
+  const product = stateLoacation.state;
+  console.log("product>>>", product);
 
   return (
     <div className="mt-6 p-4 bg-gray-800 rounded text-white">
@@ -23,14 +16,16 @@ export default function AlbumDetail() {
         <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
 
         <p className="text-green-400 mb-4">${product.price}</p>
-
-        {product.images?.[0] && (
-          <img
-            src={product.images[0]}
-            alt={product.title}
-            className="w-full max-w-md rounded-xl mb-4"
-          />
-        )}
+        <div className="flex gap-2 overflow-x-auto py-2">
+          {product?.images?.map((img, i) => (
+            <img
+              key={i}
+              src={img}
+              alt={`${product?.title}-${i}`}
+              className="h-34 w-34 object-cover rounded-md flex-shrink-0"
+            />
+          ))}
+        </div>
 
         <p className="text-gray-300">{product.description}</p>
       </div>

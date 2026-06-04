@@ -3,6 +3,11 @@ import { Outlet, NavLink } from "react-router";
 export default function AlbumsLayout() {
   return (
     <div>
+      <br></br>
+      Working on Nested Routes-Dynamic Routing-UseParams- UseLocation
+      <br></br>
+      --------------------------------------------
+      <br></br>
       <h1 className="text-2xl font-bold mb-4">Albums</h1>
       <div className="flex gap-3 mb-4">
         <NavLink

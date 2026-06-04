@@ -54,6 +54,7 @@ export default function AlbumGallery() {
                 //currennt route is /albums  and we want to go to /albums/:id when we click on the product, so we can use relative routing by just putting the id as the link's to prop
                 // to={`${p.id}`}
                 to={`productdetail/${p.id}`}
+                state={p}
                 className="bg-gray-900 rounded-xl p-3 hover:scale-105 transition"
               >
                 <img src={p.images?.[0]} className="h-40 w-full object-cover" />
