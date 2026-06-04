@@ -4,6 +4,7 @@ import { getProductById } from "../api/getProductbyId";
 import { useCallback } from "react";
 
 export default function AlbumDetail() {
+  //UseParams is carrying the parameters in routes and we can call it like this :
   const { id } = useParams();
   const fetchProduct = useCallback(() => {
     if (!id) throw new Error("No ID");
@@ -17,7 +18,7 @@ export default function AlbumDetail() {
 
   return (
     <div className="mt-6 p-4 bg-gray-800 rounded text-white">
-      <h2 className="text-xl font-bold">Album Detail - {id}</h2>
+      <h2 className="text-xl font-bold">Product id - {id}</h2>
       <div className="p-6 text-white">
         <h1 className="text-2xl font-bold mb-2">{product.title}</h1>
 
