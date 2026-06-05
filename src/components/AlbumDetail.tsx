@@ -17,7 +17,7 @@ export default function AlbumDetail() {
 
         <p className="text-green-400 mb-4">${product.price}</p>
         <div className="flex gap-2 overflow-x-auto py-2">
-          {product?.images?.map((img, i) => (
+          {product?.images?.map((img: string, i: number) => (
             <img
               key={i}
               src={img}

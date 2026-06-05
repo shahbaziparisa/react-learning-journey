@@ -212,6 +212,11 @@ export default function App() {
           User Gallery
         </NavLink>
       </div>
+      <br></br>
+      Here is UseNavigate
+       <button
+        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
+      >Navigate to Locations</button>
       <div className="p-4">
         <Routes>
           {/* here is Nested Routes */}
