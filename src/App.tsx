@@ -6,7 +6,7 @@ import styles from "./App.module.css";
 import AlbumGallery from "./components/AlbumGallery";
 import Categories from "./components/Categories";
 import UserGallery from "./components/UserGallery";
-import { Link, NavLink, Route, Routes } from "react-router";
+import { Link, NavLink, Route, Routes, useNavigate } from "react-router";
 import LocationList from "./components/Locations";
 import AlbumsLayout from "./components/AlbumLayout";
 import AlbumDetail from "./components/AlbumDetail";
@@ -34,6 +34,7 @@ function fetchUser(): Promise<User> {
 }
 
 export default function App() {
+  const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
@@ -112,6 +113,10 @@ export default function App() {
     setAllUsers(newSearched);
   };
 
+  const showLocation =()=>{
+    navigate('/locations')
+    console.log('navigate')
+  }
   return (
     <>
       <div className={styles.mainContainer}>
@@ -214,9 +219,9 @@ export default function App() {
       </div>
       <br></br>
       Here is UseNavigate
-       <button
-        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
-      >Navigate to Locations</button>
+      <button onClick={showLocation} className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition">
+        Navigate to Locations
+      </button>
       <div className="p-4">
         <Routes>
           {/* here is Nested Routes */}
