@@ -6,10 +6,18 @@ import styles from "./App.module.css";
 import AlbumGallery from "./components/AlbumGallery";
 import Categories from "./components/Categories";
 import UserGallery from "./components/UserGallery";
-import { Link, NavLink, Route, Routes, useNavigate } from "react-router";
+import {
+  Outlet,
+  Link,
+  NavLink,
+  Route,
+  Routes,
+  useNavigate,
+} from "react-router";
 import LocationList from "./components/Locations";
 import AlbumsLayout from "./components/AlbumLayout";
 import AlbumDetail from "./components/AlbumDetail";
+import NotFound from "./components/NotFound";
 
 // Async / Await Example
 type User = {
@@ -33,7 +41,7 @@ function fetchUser(): Promise<User> {
   });
 }
 
-export default function App() {
+function HomePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
@@ -113,10 +121,10 @@ export default function App() {
     setAllUsers(newSearched);
   };
 
-  const showLocation =()=>{
-    navigate('/locations')
-    console.log('navigate')
-  }
+  const showLocation = () => {
+    navigate("/locations");
+    console.log("navigate");
+  };
   return (
     <>
       <div className={styles.mainContainer}>
@@ -217,26 +225,42 @@ export default function App() {
           User Gallery
         </NavLink>
       </div>
+      {/* ✅ اینجا جایی است که صفحات Nested رندر می‌شوند */}
+      <div className="p-4">
+        <Outlet />
+      </div>
       <br></br>
       Here is UseNavigate
-      <button onClick={showLocation} className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition">
+      <button
+        onClick={showLocation}
+        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
+      >
         Navigate to Locations
       </button>
-      <div className="p-4">
-        <Routes>
-          {/* here is Nested Routes */}
+    </>
+  );
+}
+export default function App() {
+  return (
+    <div className="p-4">
+      <Routes>
+        {/* here is Nested Routes */}
+
+        <Route path="/" element={<HomePage />}>
           <Route path="/albums" element={<AlbumsLayout />}>
             {/* show AlbumGallery by default */}
             <Route index element={<AlbumGallery />} />
             {/* Show AlbumDetail when Id   . It is Called Dynamic Route*/}
             <Route path="productdetail/:id" element={<AlbumDetail />} />
           </Route>
+                  <Route path="/users" element={<UserGallery />} />
 
-          <Route path="/categories" element={<Categories />} />
-          <Route path="/users" element={<UserGallery />} />
-          <Route path="/locations" element={<LocationList />} />
-        </Routes>
-      </div>
-    </>
+        </Route>
+
+        <Route path="/categories" element={<Categories />} />
+        <Route path="/locations" element={<LocationList />} />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </div>
   );
 }
