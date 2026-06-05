@@ -162,7 +162,7 @@ const UserComponent = ({
             cursor: "pointer",
           }}
         >
-          {isLiked ? "❤️ Liked" : "🤍 Like"}
+          {isLiked ? "❤️ " : "🤍 "}
         </button>
         <span>👍 {likes} likes</span>
         <div>{children}</div>

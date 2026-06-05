@@ -19,7 +19,6 @@ import AlbumsLayout from "./components/AlbumLayout";
 import AlbumDetail from "./components/AlbumDetail";
 import NotFound from "./components/NotFound";
 
-// Async / Await Example
 type User = {
   id: number;
   name: string;
@@ -29,7 +28,6 @@ type User = {
   specialty?: string;
 };
 
-// Fake async function
 function fetchUser(): Promise<User> {
   return new Promise((resolve) => {
     setTimeout(() => {
@@ -46,6 +44,7 @@ function HomePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
+
   const initialUsers: User[] = [
     {
       id: 1,
@@ -80,6 +79,7 @@ function HomePage() {
       specialty: "Style",
     },
   ];
+
   const [alluser, setAllUsers] = useState<User[]>(initialUsers);
 
   const updateTotalLikes = (change: number): void => {
@@ -89,23 +89,18 @@ function HomePage() {
   const handleLoadUser = async () => {
     try {
       setLoading(true);
-
       console.log("Loading started...");
-
-      // wait for promise result
       const data = await fetchUser();
-
       console.log("User loaded:", data);
-
       setUser(data);
     } catch (error) {
       console.log("Error:", error);
     } finally {
       setLoading(false);
-
       console.log("Loading finished");
     }
   };
+
   const deleteUser = (id: number) => {
     setAllUsers(alluser.filter((user) => user.id !== id));
   };
@@ -125,9 +120,10 @@ function HomePage() {
     navigate("/locations");
     console.log("navigate");
   };
+
   return (
-    <>
-      <div className={styles.mainContainer}>
+    <div className={styles.mainContainer}>
+      <div>
         <h1>My React Learning Journey Tests</h1>
         <h2>Async / Await Example</h2>
         <button onClick={handleLoadUser}>Load User</button>
@@ -138,11 +134,16 @@ function HomePage() {
             <p>Name: {user.name}</p>
           </div>
         )}
-        -----------------------------------
       </div>
+
+      <div className={styles.separator}></div>
+
       <ClassComponent />
       <FunctionalComponent />
-      Props & States -Search User
+
+      <div className={styles.separator}></div>
+
+      <strong>Props & States - Search User</strong>
       <input
         style={{
           backgroundColor: "#ffffff",
@@ -153,6 +154,7 @@ function HomePage() {
         type="text"
         onChange={(e) => searchUser(e.target.value)}
       />
+
       <div className={styles["all-users-container"]}>
         {alluser.map((user) => (
           <UserComponent
@@ -163,8 +165,8 @@ function HomePage() {
           >
             {user.id === 1 && (
               <div>
-                <button>Test</button>
-                children
+                <button>T</button>
+                child
               </div>
             )}
           </UserComponent>
@@ -181,82 +183,80 @@ function HomePage() {
           💖 Total Likes : {totalLikes}
         </div>
       </div>
-      -----------------------------------
-      <br />
-      Working with Axios -State & Effects
+
+      <div className={styles.separator}></div>
+
+      <strong>Working with Axios - State & Effects</strong>
       <AlbumGallery />
-      -----------------------------------
-      <br />
-      Useing Loading , Data and Error handleing Repeatedly for different
-      components is not a good idea
-      <br /> Solution : Create a reusable component to handle loading , data and
-      error states
-      <br />
-      <br />
+
+      <div className={styles.separator}></div>
+
+      <p>
+        Using Loading, Data and Error handling Repeatedly for different
+        components is not a good idea
+      </p>
+      <p>
+        <strong>Solution:</strong> Create a reusable component to handle
+        loading, data and error states
+      </p>
+
       <Categories />
       <UserGallery />
-      This is Link
-      <Link
-        to="/locations"
-        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
-      >
-        Route to Locations
-      </Link>
-      <br></br>
-      These are NavLink
-      <div className="flex gap-3 p-4 border-b">
-        <br></br>
+
+      <div className={styles.separator}></div>
+
+      <div className={styles.buttonGroup}>
+        <span className={styles.buttonLabel}>🔗 This is Link</span>
+        <Link to="/locations" className={styles.linkButton}>
+          Route to Locations
+        </Link>
+      </div>
+
+      <div className={styles.buttonGroup}>
+        <span className={styles.buttonLabel}>📌 These are NavLinks</span>
         <NavLink
           to="/albums"
           className={({ isActive }) =>
-            `px-5 py-2.5 rounded-xl shadow-md transition
-            ${isActive ? "bg-purple-600 text-white" : "bg-gray-300 text-black"}`
+            isActive ? styles.navLinkActive : styles.navLinkInactive
           }
         >
-          Product Gallery
+          🖼️ Product Gallery
         </NavLink>
         <NavLink
           to="/users"
           className={({ isActive }) =>
-            `px-5 py-2.5 rounded-xl shadow-md transition
-            ${isActive ? "bg-purple-600 text-white" : "bg-gray-300 text-black"}`
+            isActive ? styles.navLinkActive : styles.navLinkInactive
           }
         >
-          User Gallery
+          👥 User Gallery
         </NavLink>
       </div>
-      {/* ✅ اینجا جایی است که صفحات Nested رندر می‌شوند */}
-      <div className="p-4">
+
+      <div className={styles.buttonGroup}>
+        <span className={styles.buttonLabel}>🧭 Here is useNavigate</span>
+        <button onClick={showLocation} className={styles.normalButton}>
+          Navigate to Locations
+        </button>
+      </div>
+
+      <div className={styles.outletContainer}>
         <Outlet />
       </div>
-      <br></br>
-      Here is UseNavigate
-      <button
-        onClick={showLocation}
-        className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"
-      >
-        Navigate to Locations
-      </button>
-    </>
+    </div>
   );
 }
+
 export default function App() {
   return (
-    <div className="p-4">
+    <div>
       <Routes>
-        {/* here is Nested Routes */}
-
         <Route path="/" element={<HomePage />}>
           <Route path="/albums" element={<AlbumsLayout />}>
-            {/* show AlbumGallery by default */}
             <Route index element={<AlbumGallery />} />
-            {/* Show AlbumDetail when Id   . It is Called Dynamic Route*/}
             <Route path="productdetail/:id" element={<AlbumDetail />} />
           </Route>
-                  <Route path="/users" element={<UserGallery />} />
-
+          <Route path="/users" element={<UserGallery />} />
         </Route>
-
         <Route path="/categories" element={<Categories />} />
         <Route path="/locations" element={<LocationList />} />
         <Route path="*" element={<NotFound />} />
