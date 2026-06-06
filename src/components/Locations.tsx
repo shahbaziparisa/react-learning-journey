@@ -1,9 +1,13 @@
 import { useFetch } from "../hooks/useFetch";
 import { getLocations } from "../api/locations";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { useNavigate } from "react-router";
+import { UserContext } from "../UserContext";
 
 export default function LocationList() {
+  const context = useContext(UserContext);
+  console.log(context);
+
   const navigate = useNavigate();
   const fetchLocations = useCallback(() => getLocations(1), []);
   const { data: locations, loading, error } = useFetch(fetchLocations);
@@ -23,6 +27,9 @@ export default function LocationList() {
       {!loading && !error && (
         <div className="min-h-screen bg-gray-950 text-white p-6">
           <h1 className="text-2xl font-bold mb-6 text-gray-800">Locations</h1>
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">
+            User Name : {context.user.name}
+          </h2>
           <button
             onClick={() => navigate(-1)}
             className="px-5 py-2.5 rounded-xl bg-blue-600 text-white shadow-md hover:bg-blue-700 transition"

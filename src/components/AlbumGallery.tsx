@@ -1,9 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { getProducts } from "../api/products";
 import { useFetch } from "../hooks/useFetch";
 import { Link } from "react-router";
+import { UserContext } from "../UserContext";
 
 export default function AlbumGallery() {
+  const context = useContext(UserContext);
+
   // const { data: products, loading, error } = useFetch(() => getProducts(12));
   //It is better to use useCallback to memoize the fetchProducts function, because if we don't use it, the function will be recreated on every render, and it will cause the useEffect in useFetch to run on every render, which is not what we want. We only want to fetch products when the component mounts, not on every render. By using useCallback, we ensure that the fetchProducts function is only created once, and it will not cause unnecessary re-renders or re-fetching of products.
   const fetchProducts = useCallback(() => getProducts(12), []);
@@ -46,7 +49,9 @@ export default function AlbumGallery() {
       {!loading && !error && (
         <div className="min-h-screen bg-gray-950 text-white p-6">
           <h1 className="text-2xl font-bold mb-6">Products</h1>
-
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">
+            User Name : {context.user.name}
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {products?.map((p) => (
               <Link

@@ -1,11 +1,13 @@
 import { getCategories } from "../api/categories";
 import { useFetch } from "../hooks/useFetch";
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
+import { UserContext } from "../UserContext";
 
 export default function Categories() {
   const fetchCategories = useCallback(() => getCategories(5), []);
   //categories is change name alias for data, because we know that data is categories, so it is better to change the name of data to categories to make it more readable and understandable.
   const { data: categories, loading, error } = useFetch(fetchCategories);
+  const context = useContext(UserContext);
 
   return (
     <>
@@ -22,7 +24,9 @@ export default function Categories() {
       {!loading && !error && (
         <div className=" bg-gray-950 text-white p-6">
           <h1 className="text-2xl font-bold mb-6">Categories</h1>
-
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">
+            User Name : {context.user.name}
+          </h2>
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {categories?.map((c) => (
               <div

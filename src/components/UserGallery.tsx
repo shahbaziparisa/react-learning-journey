@@ -1,10 +1,12 @@
-import { useCallback } from "react";
+import { useCallback, useContext } from "react";
 import { getUserGallery } from "../api/userGallery";
 import { useFetch } from "../hooks/useFetch";
+import { UserContext } from "../UserContext";
 
 export default function UserGallery() {
   const fetchUserGallery = useCallback(() => getUserGallery(4), []);
   const { data: userGallery, loading, error } = useFetch(fetchUserGallery);
+  const context = useContext(UserContext);
 
   return (
     <>
@@ -21,6 +23,9 @@ export default function UserGallery() {
       {!loading && !error && (
         <div className=" bg-gray-950 text-white p-6">
           <h1 className="text-2xl font-bold mb-6">User Gallery</h1>
+          <h2 className="text-2xl font-bold mb-6 text-gray-800">
+            User Name : {context.user.name}
+          </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {userGallery?.map((u) => (

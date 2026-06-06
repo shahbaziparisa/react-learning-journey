@@ -18,7 +18,6 @@ import LocationList from "./components/Locations";
 import AlbumsLayout from "./components/AlbumLayout";
 import AlbumDetail from "./components/AlbumDetail";
 import NotFound from "./components/NotFound";
-
 type User = {
   id: number;
   name: string;
