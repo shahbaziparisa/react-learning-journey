@@ -24,7 +24,7 @@ export default function UserGallery() {
         <div className=" bg-gray-950 text-white p-6">
           <h1 className="text-2xl font-bold mb-6">User Gallery</h1>
           <h2 className="text-2xl font-bold mb-6 text-gray-800">
-            User Name : {context.user.name}
+            User Name : {context?.user?.name}
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">

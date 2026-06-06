@@ -28,7 +28,7 @@ export default function LocationList() {
         <div className="min-h-screen bg-gray-950 text-white p-6">
           <h1 className="text-2xl font-bold mb-6 text-gray-800">Locations</h1>
           <h2 className="text-2xl font-bold mb-6 text-gray-800">
-            User Name : {context.user.name}
+            User Name : {context?.user?.name}
           </h2>
           <button
             onClick={() => navigate(-1)}
