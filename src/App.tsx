@@ -18,6 +18,8 @@ import LocationList from "./components/Locations";
 import AlbumsLayout from "./components/AlbumLayout";
 import AlbumDetail from "./components/AlbumDetail";
 import NotFound from "./components/NotFound";
+import LoadingModal from "./components/Loading";
+
 type User = {
   id: number;
   name: string;
@@ -126,7 +128,8 @@ function HomePage() {
         <h1>My React Learning Journey Tests</h1>
         <h2>Async / Await Example</h2>
         <button onClick={handleLoadUser}>Load User</button>
-        {loading && <p>Loading...</p>}
+        {/* {loading && <LoadingModal open={loading/>} */}
+        <LoadingModal open={loading} />
         {user && (
           <div>
             <p>ID: {user.id}</p>
