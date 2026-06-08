@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ClassComponent from "./components/ClassComponent";
 import FunctionalComponent from "./components/FunctionalComponent";
 import UserComponent from "./components/userComponent/UserComponent";
@@ -45,6 +45,7 @@ function HomePage() {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
+  const [searchText, setSearchText] = useState("");
 
   const initialUsers: User[] = [
     {
@@ -106,16 +107,27 @@ function HomePage() {
     setAllUsers(alluser.filter((user) => user.id !== id));
   };
 
-  const searchUser = (char: string) => {
-    const search = char.toLowerCase();
-    const newSearched = initialUsers.filter(
+  //Old Version without UseMemo
+  // const searchUser = (char: string) => {
+  //   const search = char.toLowerCase();
+  //   const newSearched = initialUsers.filter(
+  //     (user) =>
+  //       user.name.toLowerCase().includes(search) ||
+  //       user.family?.toLowerCase().includes(search),
+  //   );
+  //   console.log(newSearched);
+  //   setAllUsers(newSearched);
+  // };
+  //UseMemo
+  const filteredUsers = useMemo(() => {
+    console.log("Filtering Users...");
+
+    return initialUsers.filter(
       (user) =>
-        user.name.toLowerCase().includes(search) ||
-        user.family?.toLowerCase().includes(search),
+        user.name.toLowerCase().includes(searchText.toLowerCase()) ||
+        user.family?.toLowerCase().includes(searchText.toLowerCase()),
     );
-    console.log(newSearched);
-    setAllUsers(newSearched);
-  };
+  }, [searchText]);
 
   const showLocation = () => {
     navigate("/locations");
@@ -154,11 +166,12 @@ function HomePage() {
           borderRadius: "8px",
         }}
         type="text"
-        onChange={(e) => searchUser(e.target.value)}
+        // onChange={(e) => searchUser(e.target.value)}
+        onChange={(e) => setSearchText(e.target.value)}
       />
 
       <div className={styles["all-users-container"]}>
-        {alluser.map((user) => (
+        {filteredUsers.map((user) => (
           <UserComponent
             key={user.id}
             {...user}
@@ -243,6 +256,11 @@ function HomePage() {
 
       <div className={styles.outletContainer}>
         <Outlet />
+      </div>
+
+      <div className={styles.buttonGroup}>
+        <span className={styles.buttonLabel}>🔗 This is UseMemo</span>
+        <button onClick={handleLoadUser}>Huge Calculation</button>
       </div>
     </div>
   );
