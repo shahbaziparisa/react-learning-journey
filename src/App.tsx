@@ -46,7 +46,6 @@ function HomePage() {
   const [loading, setLoading] = useState(false);
   const [totalLikes, setTotalLikes] = useState(0);
   const [searchText, setSearchText] = useState("");
-
   const initialUsers: User[] = [
     {
       id: 1,
@@ -128,6 +127,17 @@ function HomePage() {
         user.family?.toLowerCase().includes(searchText.toLowerCase()),
     );
   }, [searchText]);
+  const hugeResult = useMemo(() => {
+    console.log("Huge Calculation Running...");
+
+    let total = 0;
+
+    for (let i = 0; i < 100000000; i++) {
+      total += i;
+    }
+
+    return total;
+  }, []);
 
   const showLocation = () => {
     navigate("/locations");
@@ -157,7 +167,7 @@ function HomePage() {
 
       <div className={styles.separator}></div>
 
-      <strong>Props & States - Search User</strong>
+      <strong>Props & States - Search User -UseMemo</strong>
       <input
         style={{
           backgroundColor: "#ffffff",
@@ -259,8 +269,10 @@ function HomePage() {
       </div>
 
       <div className={styles.buttonGroup}>
-        <span className={styles.buttonLabel}>🔗 This is UseMemo</span>
-        <button onClick={handleLoadUser}>Huge Calculation</button>
+        <span className={styles.buttonLabel}>
+          🔗 This is UseMemo -in First Mount
+        </span>
+        <p>{hugeResult}</p>
       </div>
     </div>
   );
