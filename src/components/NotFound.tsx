@@ -1,6 +1,8 @@
 import { motion } from "framer-motion";
 
 const NotFound: React.FC = () => {
+  console.log("**Render NotFound");
+
   return (
     <motion.div
       initial={{ opacity: 0 }}

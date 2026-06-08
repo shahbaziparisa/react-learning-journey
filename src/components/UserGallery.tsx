@@ -4,6 +4,8 @@ import { useFetch } from "../hooks/useFetch";
 import { UserContext } from "../UserContext";
 
 export default function UserGallery() {
+  console.log("**Render UserGallery");
+
   const fetchUserGallery = useCallback(() => getUserGallery(4), []);
   const { data: userGallery, loading, error } = useFetch(fetchUserGallery);
   const context = useContext(UserContext);

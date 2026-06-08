@@ -5,6 +5,8 @@ import { useNavigate } from "react-router";
 import { UserContext } from "../UserContext";
 
 export default function LocationList() {
+  console.log("**Render LocationList");
+
   const context = useContext(UserContext);
   console.log(context);
 

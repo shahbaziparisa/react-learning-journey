@@ -19,6 +19,7 @@ import AlbumsLayout from "./components/AlbumLayout";
 import AlbumDetail from "./components/AlbumDetail";
 import NotFound from "./components/NotFound";
 import LoadingModal from "./components/Loading";
+import Canvas3D from "./components/Canvas3D";
 
 type User = {
   id: number;
@@ -41,6 +42,7 @@ function fetchUser(): Promise<User> {
 }
 
 function HomePage() {
+  console.log("**Render HomePage");
   const navigate = useNavigate();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
@@ -274,11 +276,18 @@ function HomePage() {
         </span>
         <p>{hugeResult}</p>
       </div>
+      <span className={styles.buttonLabel}>
+        🔗 Usage of UseEffect,UseRef,UseState,UseMemo,UseCallback in Three.js
+      </span>
+      <br />
+      <br />
+      <Canvas3D />
     </div>
   );
 }
 
 export default function App() {
+  console.log("**Render App");
   return (
     <div>
       <Routes>

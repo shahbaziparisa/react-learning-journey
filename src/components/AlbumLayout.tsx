@@ -1,6 +1,8 @@
 import { Outlet, NavLink } from "react-router";
 
 export default function AlbumsLayout() {
+  console.log("**Render AlbumsLayout");
+
   return (
     <div>
       <br></br>

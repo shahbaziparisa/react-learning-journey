@@ -4,6 +4,8 @@ import { useCallback, useContext } from "react";
 import { UserContext } from "../UserContext";
 
 export default function Categories() {
+  console.log("**Render Categories");
+
   const fetchCategories = useCallback(() => getCategories(5), []);
   //categories is change name alias for data, because we know that data is categories, so it is better to change the name of data to categories to make it more readable and understandable.
   const { data: categories, loading, error } = useFetch(fetchCategories);

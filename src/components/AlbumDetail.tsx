@@ -1,6 +1,8 @@
 import { useLocation, useParams } from "react-router";
 
 export default function AlbumDetail() {
+  console.log("**Render AlbumDetail");
+
   //UseParams is carrying the parameters in routes and we can call it like this :
   const { id } = useParams();
   //UseLocation can carry one state and more contains objects

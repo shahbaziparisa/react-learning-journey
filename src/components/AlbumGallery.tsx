@@ -6,6 +6,7 @@ import { UserContext } from "../UserContext";
 
 export default function AlbumGallery() {
   const context = useContext(UserContext);
+  console.log("**Render AlbumGallery");
 
   // const { data: products, loading, error } = useFetch(() => getProducts(12));
   //It is better to use useCallback to memoize the fetchProducts function, because if we don't use it, the function will be recreated on every render, and it will cause the useEffect in useFetch to run on every render, which is not what we want. We only want to fetch products when the component mounts, not on every render. By using useCallback, we ensure that the fetchProducts function is only created once, and it will not cause unnecessary re-renders or re-fetching of products.

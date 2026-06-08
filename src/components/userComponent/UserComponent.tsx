@@ -28,6 +28,7 @@ const UserComponent = ({
   children,
   handleDelete,
 }: UserComponentProps) => {
+  console.log("**Render UserComponent");
   const age = dateOfBirth ? new Date().getFullYear() - dateOfBirth : "Unknown";
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);

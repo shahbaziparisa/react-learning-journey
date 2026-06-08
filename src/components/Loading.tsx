@@ -7,6 +7,7 @@ type LoadingModalProps = {
 
 const LoadingModal: React.FC<LoadingModalProps> = ({ open }) => {
   if (!open) return null;
+  console.log("**Render LoadingModal");
 
   const modalRoot = document.getElementById("modal-root");
   if (!modalRoot) return null;
