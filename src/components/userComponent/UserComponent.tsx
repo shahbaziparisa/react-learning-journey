@@ -1,4 +1,6 @@
 import "./userComponent.css";
+import React from "react";
+
 import {
   useEffect,
   useLayoutEffect,
@@ -28,7 +30,7 @@ const UserComponent = ({
   children,
   handleDelete,
 }: UserComponentProps) => {
-  console.log("**Render UserComponent");
+  console.log("**Render UserComponent---------");
   const age = dateOfBirth ? new Date().getFullYear() - dateOfBirth : "Unknown";
   const [likes, setLikes] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
@@ -186,4 +188,6 @@ const UserComponent = ({
   );
 };
 
-export default UserComponent;
+// export default UserComponent;
+// Memoized version
+export default React.memo(UserComponent);
